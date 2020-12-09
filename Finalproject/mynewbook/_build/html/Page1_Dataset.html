@@ -259,24 +259,236 @@ the company’s subset of data and show their discoveries to the world.</p>
 <div class="section" id="the-hotels-dataframe">
 <h2>The Hotels Dataframe<a class="headerlink" href="#the-hotels-dataframe" title="Permalink to this headline">¶</a></h2>
 <p>There are in total <strong>438 hotels</strong> identified by their unique business ids. The name, address, city, state, postal_code, latitude, longitude have been collected. The average stars of the hotels can be seen in the “stars” column, right next to the review_counts.</p>
-<p>business_df = pd.read_csv(‘./data/las_vegas_all_business.csv’)
-review_df = pd.read_csv(‘./data/las_vegas_all_reviews.csv’)
-keywords = pd.read_csv(‘./data/las_vegas_business_keywords.csv’)</p>
+<div class="cell tag_remove-input docutils container">
+</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">491</span><span class="n">a7e15ea15</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Filter business_id according to the category</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">filter_business_id</span> <span class="o">=</span> <span class="n">business_df</span><span class="p">[</span><span class="n">business_df</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(Hotels, )|(, Hotels$)&quot;</span><span class="p">,</span> <span class="n">regex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">==</span><span class="kc">True</span><span class="p">]</span><span class="o">.</span><span class="n">business_id</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Filter businesses</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">business_df</span> <span class="o">=</span> <span class="n">business_df</span><span class="p">[</span><span class="n">business_df</span><span class="o">.</span><span class="n">business_id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">filter_business_id</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;stars&#39;</span><span class="p">:</span> <span class="s1">&#39;stars_business&#39;</span><span class="p">})</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">NameError</span>: name &#39;business_df&#39; is not defined
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>business_id</th>
+      <th>name</th>
+      <th>address</th>
+      <th>city</th>
+      <th>state</th>
+      <th>postal_code</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>stars</th>
+      <th>review_count</th>
+      <th>is_open</th>
+      <th>attributes</th>
+      <th>categories</th>
+      <th>hours</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>izw7OBVSeNmlVhjly1amQg</td>
+      <td>Wyndham Vacation Ownership</td>
+      <td>3475 Las Vegas Blvd S</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89109.0</td>
+      <td>36.119725</td>
+      <td>-115.172396</td>
+      <td>1.5</td>
+      <td>154</td>
+      <td>1</td>
+      <td>{"BusinessAcceptsCreditCards": "True", "Restau...</td>
+      <td>Hotels &amp; Travel, Hotels, Event Planning &amp; Serv...</td>
+      <td>{}</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>tzlm9Im_8h144lDuIi4o1Q</td>
+      <td>Extended Stay America - Las Vegas - Midtown</td>
+      <td>3045 South Maryland Pkwy</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89109.0</td>
+      <td>36.135074</td>
+      <td>-115.137917</td>
+      <td>1.5</td>
+      <td>48</td>
+      <td>1</td>
+      <td>{"RestaurantsPriceRange2": "1", "BusinessAccep...</td>
+      <td>Event Planning &amp; Services, Hotels &amp; Travel, Ho...</td>
+      <td>{"Monday": "0:00-0:00", "Tuesday": "0:00-0:00"...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mv9CWDyMw5jgFmtrJePN3w</td>
+      <td>Robertsmith Ranch Resort</td>
+      <td>6350 W Tara Ave</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89146.0</td>
+      <td>36.138109</td>
+      <td>-115.251317</td>
+      <td>5.0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>{"RestaurantsPriceRange2": "2", "WiFi": "free"}</td>
+      <td>Hotels &amp; Travel, Guest Houses, Event Planning ...</td>
+      <td>{}</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>vchjO0Vs5FwW2tpFnCimqg</td>
+      <td>Planet Hollywood Towers</td>
+      <td>Westgate Resorts, 80 E Harmon Ave</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89109.0</td>
+      <td>36.124423</td>
+      <td>-115.146372</td>
+      <td>3.5</td>
+      <td>324</td>
+      <td>0</td>
+      <td>{"WiFi": "paid", "BusinessAcceptsCreditCards":...</td>
+      <td>Hotels &amp; Travel, Event Planning &amp; Services, Ho...</td>
+      <td>{"Monday": "9:00-9:00"}</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8kWUrcPJNzVsVqt0xtzrdg</td>
+      <td>Emerald Suites - Convention Center</td>
+      <td>3684 Paradise Rd</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89109.0</td>
+      <td>36.122549</td>
+      <td>-115.153447</td>
+      <td>1.0</td>
+      <td>16</td>
+      <td>1</td>
+      <td>{"BusinessAcceptsCreditCards": "True", "Restau...</td>
+      <td>Real Estate, Home Services, Hotels &amp; Travel, A...</td>
+      <td>{"Monday": "8:00-20:00", "Tuesday": "8:00-20:0...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>433</th>
+      <td>K0U703sJ-Frg-lr2c1JXXA</td>
+      <td>La Quinta Inn</td>
+      <td>4975 S Valley View Blvd</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89118.0</td>
+      <td>36.099568</td>
+      <td>-115.183582</td>
+      <td>2.5</td>
+      <td>6</td>
+      <td>0</td>
+      <td>{"RestaurantsPriceRange2": "3", "BusinessAccep...</td>
+      <td>Hotels, Event Planning &amp; Services, Hotels &amp; Tr...</td>
+      <td>{}</td>
+    </tr>
+    <tr>
+      <th>434</th>
+      <td>VsajJw_iaIvVbxQ0aWCTxg</td>
+      <td>Vegas Party VIP</td>
+      <td>4290 S Cameron St, Ste 3</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89103.0</td>
+      <td>36.111896</td>
+      <td>-115.203430</td>
+      <td>4.5</td>
+      <td>78</td>
+      <td>1</td>
+      <td>{"RestaurantsGoodForGroups": "True", "Business...</td>
+      <td>Party Supplies, Wedding Planning, Hotels, Tick...</td>
+      <td>{"Monday": "0:00-0:00", "Tuesday": "8:00-23:00...</td>
+    </tr>
+    <tr>
+      <th>435</th>
+      <td>gf8DvdbgpfRlFQBUsV5gJA</td>
+      <td>Hampton Inn Las Vegas/Summerlin</td>
+      <td>7100 Cascade Valley Ct</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89128.0</td>
+      <td>36.211987</td>
+      <td>-115.247174</td>
+      <td>4.0</td>
+      <td>55</td>
+      <td>1</td>
+      <td>{"WiFi": "free", "RestaurantsPriceRange2": "2"...</td>
+      <td>Hotels, Hotels &amp; Travel, Event Planning &amp; Serv...</td>
+      <td>{"Monday": "0:00-0:00", "Tuesday": "0:00-0:00"...</td>
+    </tr>
+    <tr>
+      <th>436</th>
+      <td>GGoQdKo8QgKfTW23hf4Tuw</td>
+      <td>MGM Grand Poker Room</td>
+      <td>3799 Las Vegas Blvd S</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89109.0</td>
+      <td>36.102437</td>
+      <td>-115.169351</td>
+      <td>3.0</td>
+      <td>65</td>
+      <td>1</td>
+      <td>{"RestaurantsPriceRange2": "2", "BusinessAccep...</td>
+      <td>Hotels &amp; Travel, Event Planning &amp; Services, Ho...</td>
+      <td>{"Monday": "0:00-0:00", "Tuesday": "0:00-0:00"...</td>
+    </tr>
+    <tr>
+      <th>437</th>
+      <td>swtA5YoSGm0V5esQuDm2NQ</td>
+      <td>Social</td>
+      <td>4321 W Flamingo Rd</td>
+      <td>Las Vegas</td>
+      <td>NV</td>
+      <td>89103.0</td>
+      <td>36.116697</td>
+      <td>-115.202944</td>
+      <td>4.0</td>
+      <td>19</td>
+      <td>0</td>
+      <td>{"RestaurantsGoodForGroups": "True", "Business...</td>
+      <td>Resorts, Restaurants, Event Planning &amp; Service...</td>
+      <td>{}</td>
+    </tr>
+  </tbody>
+</table>
+<p>438 rows × 14 columns</p>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="the-reviews-dataframe">
