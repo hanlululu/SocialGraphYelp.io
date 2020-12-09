@@ -9,11 +9,7 @@ logo: logo.png
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
-  
-## use thebe for showing ipywidgets interactive plots 
-launch_buttons:
-  thebe                  : true
-  
+
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
