@@ -61,11 +61,15 @@ pio.renderers.default = 'notebook'
 
 # There are in total **438 hotels** identified by their unique business ids. The name, address, city, state, postal_code, latitude, longitude have been collected. The average stars of the hotels can be seen in the "stars" column, right next to the review_counts. 
 
-# business_df = pd.read_csv('./data/las_vegas_all_business.csv')
-# review_df = pd.read_csv('./data/las_vegas_all_reviews.csv')
-# keywords = pd.read_csv('./data/las_vegas_business_keywords.csv')
-
 # In[2]:
+
+
+business_df = pd.read_csv('./data/las_vegas_all_business.csv')
+review_df = pd.read_csv('./data/las_vegas_all_reviews.csv')
+keywords = pd.read_csv('./data/las_vegas_business_keywords.csv')
+
+
+# In[3]:
 
 
 import warnings
@@ -92,7 +96,7 @@ business_df
 
 # There are in total **172159 reviews** stored in the "text" column and the dates of reviews given stored in the "date" column, together with the ratings the users gave shown in the "stars" column. The usefulness, funiness, and coolness of the reviews are also been rated from a scale of 0 to 5. Moreover, the review, user and business ids have been collected. 
 
-# In[52]:
+# In[4]:
 
 
 #columns_rev = ['review_id', 'user_id', 'business_id', 'stars', 'useful', 'funny',
