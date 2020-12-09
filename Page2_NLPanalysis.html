@@ -50,9 +50,9 @@
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -181,11 +181,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://hanlululu.github.io/Socialgraphswebsite.io/Page4_Sentiment.html?fbclid=IwAR0h0zjmyFPv81icsAOa24Tff27JMEx0SETuggSlFd0ewjuGJE3VIBSg3pk"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPage2_NLPanalysis.html&body=Your%20issue%20content%20here."><button
+            href="https://hanlululu.github.io/Socialgraphswebsite.io/Page4_Sentiment.html?fbclid=IwAR0h0zjmyFPv81icsAOa24Tff27JMEx0SETuggSlFd0ewjuGJE3VIBSg3pk/issues/new?title=Issue%20on%20page%20%2FPage2_NLPanalysis.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -200,23 +200,6 @@
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Page2_NLPanalysis.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
 
     </div>
 
@@ -344,7 +327,7 @@ if (outputEl) {{
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "None/None",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -376,7 +359,7 @@ if (outputEl) {{
     <div class="container">
       <p>
         
-          By Yingrui, Sebastians, Hanlu<br/>
+          By Yingrui, Sebastian, Hanlu<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
