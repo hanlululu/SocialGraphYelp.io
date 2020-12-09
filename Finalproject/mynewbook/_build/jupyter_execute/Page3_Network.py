@@ -740,3 +740,50 @@ plt.tight_layout(pad = 1)
 # 
 # 
 # * Community 3 seems to have most words related to games, alcoholic drinking, as well as swear words, indicating that this community may be strongly involved with bar-hotels and the ones of a more "frivolous" nature.
+
+# ## Topic detection using LDA
+
+# __Topic modelling__ is a tool for discovering hidden abstract semantic structures of texts, where __Latent Dirichlet allocation__ (known as LDA) as an unsupervised learning method is one way of performing topic modelling. 
+# 
+# Normally, LDA can be applied when we are trying to understand the latent topics in a large document collection without knowing what kind of topics there will be. The main idea of it is that ___each document can be described by a distribution of topics and each topic can be described by a distribution of words___. Applying LDA on a bag of words will result in several generated topics, each of which is composed of a distribution of keywords. 
+# 
+# After performing community detection using Louvain algorithm, the original dataset containing reviews has been split into 4 communities with their own wordclouds generated from reviews. 
+# 
+# Since the Louvain algorithm has given us 4 communities, upon which we have plotted 4 wordclouds (each corresponding to a community), we decided to use topic modelling to check whether the results from a completely different unsupervised method will generate similar word structure patterns as the ones we have for the wordclouds. In order to understand if these two methods (__LDA vs. wordclouds__) find similar features in clustering words, we have set the input number of topics to 4 in the LDA model.
+
+# In[22]:
+
+
+# Topic modeling libraries
+
+import gensim
+from gensim import corpora, models
+import pyLDAvis
+import pyLDAvis.gensim
+
+warnings.simplefilter('ignore')
+
+# Convert reviews into bag of words
+total_review_text = pd.DataFrame(list(business_reviews.items()), 
+                                 columns = ['business_id', 'review']).review.apply(tokenize_text)
+# Create dictionary of words
+dictionary = corpora.Dictionary(total_review_text)
+# Compute the term frequency of terms in each document
+corpus = [dictionary.doc2bow(review) for review in total_review_text]
+# Compute LDA model (num_topics = 4, since we want to compare the topics to the previous 4 wordclouds)
+lda_model = gensim.models.ldamodel.LdaModel(corpus, num_topics = 4, id2word = dictionary, passes = 10)
+print('The words and scores defining each topic are:')
+lda_model.print_topics(num_topics = 4, num_words = 8)
+
+
+# In[23]:
+
+
+vis = pyLDAvis.gensim.prepare(topic_model=lda_model, corpus=corpus, dictionary=dictionary)
+pyLDAvis.enable_notebook()
+pyLDAvis.display(vis)
+
+
+# After using the LDA algorithm to find 4 large topics, it can be observed that the topics do indeed have a number of similar words shown in wordclouds (which is created through Louvain for partitioning and TF-IDF for scoring). 
+# 
+# For example, topic 4 presented here is clearly showing words related to food and dessert, such as: '_salad_', '_steak_' or '_buffet_', which is very similar to the words shown in the wordcloud for community 2. 
