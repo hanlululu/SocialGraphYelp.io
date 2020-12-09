@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The yelp dataset &#8212; Hotels in Las Vegas</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NLP analysis of hotel reviews" href="Page2_NLPanalysis.html" />
+    <link rel="prev" title="Content in Jupyter Book" href="content.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Hotels in Las Vegas</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to the Las Vegas Hotels network
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="content.html">
+   Content in Jupyter Book
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     The yelp dataset
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Page2_NLPanalysis.html">
+     NLP analysis of hotel reviews
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Page3_Network.html">
+     Network analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Page4_Sentiment.html">
+     Sentiment Analysis
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Page1_Dataset.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPage1_Dataset.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Page1_Dataset.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell tag_remove-input docutils container">
+</div>
+<div class="section" id="the-yelp-dataset">
+<h1>The yelp dataset<a class="headerlink" href="#the-yelp-dataset" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "b55a100fa09c410f8e952eedec032a41"}
+</script></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "400afc08417b4872899dba0b2995d2cb"}
+</script></div>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"a95792f46a0449aeb60b280a598099c0": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b55a100fa09c410f8e952eedec032a41": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_2ee5a4cf0eb4427a815961e92a40330d", "IPY_MODEL_85d63efc53e94e8fa94c5ae5e5d97e8e", "IPY_MODEL_8adba68fb86c4f9187d5bc9faf342108", "IPY_MODEL_2afc2cca26d34efb9baa495b1582e748", "IPY_MODEL_755255c7d57541d99483f4e01acc8152"], "layout": "IPY_MODEL_a95792f46a0449aeb60b280a598099c0"}}, "d8d5c521bab04545af7fa78072ddf8e5": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4e1f60905e774cc7a23ce5eb6ab5ef2e": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "2ee5a4cf0eb4427a815961e92a40330d": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["business_id", "name", "address", "city", "state", "postal_code", "latitude", "longitude", "stars", "review_count", "is_open", "attributes", "categories", "hours"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column1", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_d8d5c521bab04545af7fa78072ddf8e5", "style": "IPY_MODEL_4e1f60905e774cc7a23ce5eb6ab5ef2e"}}, "3b1f6dff2a7247eb840010df44e0e9c5": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0e9bda27d5b14769b612242576da9a9b": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "85d63efc53e94e8fa94c5ae5e5d97e8e": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["business_id", "name", "address", "city", "state", "postal_code", "latitude", "longitude", "stars", "review_count", "is_open", "attributes", "categories", "hours"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column2", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_3b1f6dff2a7247eb840010df44e0e9c5", "style": "IPY_MODEL_0e9bda27d5b14769b612242576da9a9b"}}, "67c0b0ff373d41c29a2b85115a9a8350": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a090f47e942b45998569feaeccd3dba8": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "8adba68fb86c4f9187d5bc9faf342108": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["business_id", "name", "address", "city", "state", "postal_code", "latitude", "longitude", "stars", "review_count", "is_open", "attributes", "categories", "hours"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column3", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_67c0b0ff373d41c29a2b85115a9a8350", "style": "IPY_MODEL_a090f47e942b45998569feaeccd3dba8"}}, "570f40a28f5a4303a19b140f6a2fe74d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "69b05129e4e546d3b7d9ef07dfd4e031": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "2afc2cca26d34efb9baa495b1582e748": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["business_id", "name", "address", "city", "state", "postal_code", "latitude", "longitude", "stars", "review_count", "is_open", "attributes", "categories", "hours"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column4", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_570f40a28f5a4303a19b140f6a2fe74d", "style": "IPY_MODEL_69b05129e4e546d3b7d9ef07dfd4e031"}}, "6da98a6c915c40bf8f290fdf86fd063f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "755255c7d57541d99483f4e01acc8152": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_6da98a6c915c40bf8f290fdf86fd063f", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {}, "data": {"text/plain": "                business_id             business_id             business_id  \\\n0    izw7OBVSeNmlVhjly1amQg  izw7OBVSeNmlVhjly1amQg  izw7OBVSeNmlVhjly1amQg   \n1    tzlm9Im_8h144lDuIi4o1Q  tzlm9Im_8h144lDuIi4o1Q  tzlm9Im_8h144lDuIi4o1Q   \n2    mv9CWDyMw5jgFmtrJePN3w  mv9CWDyMw5jgFmtrJePN3w  mv9CWDyMw5jgFmtrJePN3w   \n3    vchjO0Vs5FwW2tpFnCimqg  vchjO0Vs5FwW2tpFnCimqg  vchjO0Vs5FwW2tpFnCimqg   \n4    8kWUrcPJNzVsVqt0xtzrdg  8kWUrcPJNzVsVqt0xtzrdg  8kWUrcPJNzVsVqt0xtzrdg   \n..                      ...                     ...                     ...   \n433  K0U703sJ-Frg-lr2c1JXXA  K0U703sJ-Frg-lr2c1JXXA  K0U703sJ-Frg-lr2c1JXXA   \n434  VsajJw_iaIvVbxQ0aWCTxg  VsajJw_iaIvVbxQ0aWCTxg  VsajJw_iaIvVbxQ0aWCTxg   \n435  gf8DvdbgpfRlFQBUsV5gJA  gf8DvdbgpfRlFQBUsV5gJA  gf8DvdbgpfRlFQBUsV5gJA   \n436  GGoQdKo8QgKfTW23hf4Tuw  GGoQdKo8QgKfTW23hf4Tuw  GGoQdKo8QgKfTW23hf4Tuw   \n437  swtA5YoSGm0V5esQuDm2NQ  swtA5YoSGm0V5esQuDm2NQ  swtA5YoSGm0V5esQuDm2NQ   \n\n                business_id  \n0    izw7OBVSeNmlVhjly1amQg  \n1    tzlm9Im_8h144lDuIi4o1Q  \n2    mv9CWDyMw5jgFmtrJePN3w  \n3    vchjO0Vs5FwW2tpFnCimqg  \n4    8kWUrcPJNzVsVqt0xtzrdg  \n..                      ...  \n433  K0U703sJ-Frg-lr2c1JXXA  \n434  VsajJw_iaIvVbxQ0aWCTxg  \n435  gf8DvdbgpfRlFQBUsV5gJA  \n436  GGoQdKo8QgKfTW23hf4Tuw  \n437  swtA5YoSGm0V5esQuDm2NQ  \n\n[438 rows x 4 columns]", "text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>business_id</th>\n      <th>business_id</th>\n      <th>business_id</th>\n      <th>business_id</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>izw7OBVSeNmlVhjly1amQg</td>\n      <td>izw7OBVSeNmlVhjly1amQg</td>\n      <td>izw7OBVSeNmlVhjly1amQg</td>\n      <td>izw7OBVSeNmlVhjly1amQg</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>tzlm9Im_8h144lDuIi4o1Q</td>\n      <td>tzlm9Im_8h144lDuIi4o1Q</td>\n      <td>tzlm9Im_8h144lDuIi4o1Q</td>\n      <td>tzlm9Im_8h144lDuIi4o1Q</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>mv9CWDyMw5jgFmtrJePN3w</td>\n      <td>mv9CWDyMw5jgFmtrJePN3w</td>\n      <td>mv9CWDyMw5jgFmtrJePN3w</td>\n      <td>mv9CWDyMw5jgFmtrJePN3w</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>vchjO0Vs5FwW2tpFnCimqg</td>\n      <td>vchjO0Vs5FwW2tpFnCimqg</td>\n      <td>vchjO0Vs5FwW2tpFnCimqg</td>\n      <td>vchjO0Vs5FwW2tpFnCimqg</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>8kWUrcPJNzVsVqt0xtzrdg</td>\n      <td>8kWUrcPJNzVsVqt0xtzrdg</td>\n      <td>8kWUrcPJNzVsVqt0xtzrdg</td>\n      <td>8kWUrcPJNzVsVqt0xtzrdg</td>\n    </tr>\n    <tr>\n      <th>...</th>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <th>433</th>\n      <td>K0U703sJ-Frg-lr2c1JXXA</td>\n      <td>K0U703sJ-Frg-lr2c1JXXA</td>\n      <td>K0U703sJ-Frg-lr2c1JXXA</td>\n      <td>K0U703sJ-Frg-lr2c1JXXA</td>\n    </tr>\n    <tr>\n      <th>434</th>\n      <td>VsajJw_iaIvVbxQ0aWCTxg</td>\n      <td>VsajJw_iaIvVbxQ0aWCTxg</td>\n      <td>VsajJw_iaIvVbxQ0aWCTxg</td>\n      <td>VsajJw_iaIvVbxQ0aWCTxg</td>\n    </tr>\n    <tr>\n      <th>435</th>\n      <td>gf8DvdbgpfRlFQBUsV5gJA</td>\n      <td>gf8DvdbgpfRlFQBUsV5gJA</td>\n      <td>gf8DvdbgpfRlFQBUsV5gJA</td>\n      <td>gf8DvdbgpfRlFQBUsV5gJA</td>\n    </tr>\n    <tr>\n      <th>436</th>\n      <td>GGoQdKo8QgKfTW23hf4Tuw</td>\n      <td>GGoQdKo8QgKfTW23hf4Tuw</td>\n      <td>GGoQdKo8QgKfTW23hf4Tuw</td>\n      <td>GGoQdKo8QgKfTW23hf4Tuw</td>\n    </tr>\n    <tr>\n      <th>437</th>\n      <td>swtA5YoSGm0V5esQuDm2NQ</td>\n      <td>swtA5YoSGm0V5esQuDm2NQ</td>\n      <td>swtA5YoSGm0V5esQuDm2NQ</td>\n      <td>swtA5YoSGm0V5esQuDm2NQ</td>\n    </tr>\n  </tbody>\n</table>\n<p>438 rows \u00d7 4 columns</p>\n</div>"}}]}}, "ef7fa984de094cda97a71a4828acc239": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "400afc08417b4872899dba0b2995d2cb": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_67c88ae24b32403ba91607c301e76d42", "IPY_MODEL_ab6f65ea39674a9aa696d8dadd5a1977", "IPY_MODEL_e5e93ddec2de4651b4bc0c9d93f64d96", "IPY_MODEL_c36903b568c0453e8db8fb34bc9590df", "IPY_MODEL_9327164e50df4818b270c46e65a6f3f2"], "layout": "IPY_MODEL_ef7fa984de094cda97a71a4828acc239"}}, "db93d21d08674c18bfb158a5ea4b7605": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "86b43a3793ca4afaa3ce4f6b3f8d4586": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "67c88ae24b32403ba91607c301e76d42": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["review_id", "user_id", "business_id", "stars", "useful", "funny", "cool", "text", "date"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column1", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_db93d21d08674c18bfb158a5ea4b7605", "style": "IPY_MODEL_86b43a3793ca4afaa3ce4f6b3f8d4586"}}, "7212591019d6466e91fc94bd1e70712e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5b24be5f8b744029dad778b34f6a01e": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "ab6f65ea39674a9aa696d8dadd5a1977": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["review_id", "user_id", "business_id", "stars", "useful", "funny", "cool", "text", "date"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column2", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_7212591019d6466e91fc94bd1e70712e", "style": "IPY_MODEL_d5b24be5f8b744029dad778b34f6a01e"}}, "9c3f3e7da6d043dc8ef73264691e5e5b": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5d655ca5952347d7bfbe09a9a1b6cafa": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "e5e93ddec2de4651b4bc0c9d93f64d96": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["review_id", "user_id", "business_id", "stars", "useful", "funny", "cool", "text", "date"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column3", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_9c3f3e7da6d043dc8ef73264691e5e5b", "style": "IPY_MODEL_5d655ca5952347d7bfbe09a9a1b6cafa"}}, "aaa7f554a05f44959405b638931151e9": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9ee151013c9941888f89110920987156": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "c36903b568c0453e8db8fb34bc9590df": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["review_id", "user_id", "business_id", "stars", "useful", "funny", "cool", "text", "date"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "column4", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_aaa7f554a05f44959405b638931151e9", "style": "IPY_MODEL_9ee151013c9941888f89110920987156"}}, "79316f89cf8c49e3808b1aea3e19c0e1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9327164e50df4818b270c46e65a6f3f2": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_79316f89cf8c49e3808b1aea3e19c0e1", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {}, "data": {"text/plain": "                     review_id               review_id  \\\n0       NHQWhZve7UEaGLt7IwAyDw  NHQWhZve7UEaGLt7IwAyDw   \n1       TkcxD1A4N_9kRZwGhUjDKA  TkcxD1A4N_9kRZwGhUjDKA   \n2       vPDLvkNLtyiBTRbt-wIeLw  vPDLvkNLtyiBTRbt-wIeLw   \n3       CbwmSDCidwUHXRgjaEYJiA  CbwmSDCidwUHXRgjaEYJiA   \n4       H-BobmvT1h_4M69SVnvjEw  H-BobmvT1h_4M69SVnvjEw   \n...                        ...                     ...   \n172154  N5f9aP2kvhlcv_J1KQm8Bw  N5f9aP2kvhlcv_J1KQm8Bw   \n172155  KyhO7OlnxgehmUHwkKa2ew  KyhO7OlnxgehmUHwkKa2ew   \n172156  gV3OIJrXyklRPpeaEQYeEw  gV3OIJrXyklRPpeaEQYeEw   \n172157  iRfzGTDOacY_OBD02gvKJg  iRfzGTDOacY_OBD02gvKJg   \n172158  bpsuVerJGJq4dW6-LmCjEQ  bpsuVerJGJq4dW6-LmCjEQ   \n\n                     review_id               review_id  \n0       NHQWhZve7UEaGLt7IwAyDw  NHQWhZve7UEaGLt7IwAyDw  \n1       TkcxD1A4N_9kRZwGhUjDKA  TkcxD1A4N_9kRZwGhUjDKA  \n2       vPDLvkNLtyiBTRbt-wIeLw  vPDLvkNLtyiBTRbt-wIeLw  \n3       CbwmSDCidwUHXRgjaEYJiA  CbwmSDCidwUHXRgjaEYJiA  \n4       H-BobmvT1h_4M69SVnvjEw  H-BobmvT1h_4M69SVnvjEw  \n...                        ...                     ...  \n172154  N5f9aP2kvhlcv_J1KQm8Bw  N5f9aP2kvhlcv_J1KQm8Bw  \n172155  KyhO7OlnxgehmUHwkKa2ew  KyhO7OlnxgehmUHwkKa2ew  \n172156  gV3OIJrXyklRPpeaEQYeEw  gV3OIJrXyklRPpeaEQYeEw  \n172157  iRfzGTDOacY_OBD02gvKJg  iRfzGTDOacY_OBD02gvKJg  \n172158  bpsuVerJGJq4dW6-LmCjEQ  bpsuVerJGJq4dW6-LmCjEQ  \n\n[172159 rows x 4 columns]", "text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>review_id</th>\n      <th>review_id</th>\n      <th>review_id</th>\n      <th>review_id</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>NHQWhZve7UEaGLt7IwAyDw</td>\n      <td>NHQWhZve7UEaGLt7IwAyDw</td>\n      <td>NHQWhZve7UEaGLt7IwAyDw</td>\n      <td>NHQWhZve7UEaGLt7IwAyDw</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>TkcxD1A4N_9kRZwGhUjDKA</td>\n      <td>TkcxD1A4N_9kRZwGhUjDKA</td>\n      <td>TkcxD1A4N_9kRZwGhUjDKA</td>\n      <td>TkcxD1A4N_9kRZwGhUjDKA</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>vPDLvkNLtyiBTRbt-wIeLw</td>\n      <td>vPDLvkNLtyiBTRbt-wIeLw</td>\n      <td>vPDLvkNLtyiBTRbt-wIeLw</td>\n      <td>vPDLvkNLtyiBTRbt-wIeLw</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>CbwmSDCidwUHXRgjaEYJiA</td>\n      <td>CbwmSDCidwUHXRgjaEYJiA</td>\n      <td>CbwmSDCidwUHXRgjaEYJiA</td>\n      <td>CbwmSDCidwUHXRgjaEYJiA</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>H-BobmvT1h_4M69SVnvjEw</td>\n      <td>H-BobmvT1h_4M69SVnvjEw</td>\n      <td>H-BobmvT1h_4M69SVnvjEw</td>\n      <td>H-BobmvT1h_4M69SVnvjEw</td>\n    </tr>\n    <tr>\n      <th>...</th>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <th>172154</th>\n      <td>N5f9aP2kvhlcv_J1KQm8Bw</td>\n      <td>N5f9aP2kvhlcv_J1KQm8Bw</td>\n      <td>N5f9aP2kvhlcv_J1KQm8Bw</td>\n      <td>N5f9aP2kvhlcv_J1KQm8Bw</td>\n    </tr>\n    <tr>\n      <th>172155</th>\n      <td>KyhO7OlnxgehmUHwkKa2ew</td>\n      <td>KyhO7OlnxgehmUHwkKa2ew</td>\n      <td>KyhO7OlnxgehmUHwkKa2ew</td>\n      <td>KyhO7OlnxgehmUHwkKa2ew</td>\n    </tr>\n    <tr>\n      <th>172156</th>\n      <td>gV3OIJrXyklRPpeaEQYeEw</td>\n      <td>gV3OIJrXyklRPpeaEQYeEw</td>\n      <td>gV3OIJrXyklRPpeaEQYeEw</td>\n      <td>gV3OIJrXyklRPpeaEQYeEw</td>\n    </tr>\n    <tr>\n      <th>172157</th>\n      <td>iRfzGTDOacY_OBD02gvKJg</td>\n      <td>iRfzGTDOacY_OBD02gvKJg</td>\n      <td>iRfzGTDOacY_OBD02gvKJg</td>\n      <td>iRfzGTDOacY_OBD02gvKJg</td>\n    </tr>\n    <tr>\n      <th>172158</th>\n      <td>bpsuVerJGJq4dW6-LmCjEQ</td>\n      <td>bpsuVerJGJq4dW6-LmCjEQ</td>\n      <td>bpsuVerJGJq4dW6-LmCjEQ</td>\n      <td>bpsuVerJGJq4dW6-LmCjEQ</td>\n    </tr>\n  </tbody>\n</table>\n<p>172159 rows \u00d7 4 columns</p>\n</div>"}}]}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="content.html" title="previous page">Content in Jupyter Book</a>
+    <a class='right-next' id="next-link" href="Page2_NLPanalysis.html" title="next page">NLP analysis of hotel reviews</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Yingrui, Sebastians, Hanlu<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
