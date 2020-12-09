@@ -9,7 +9,11 @@ logo: logo.png
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
-
+  
+## use thebe for showing ipywidgets interactive plots 
+launch_buttons:
+  thebe                  : true
+  
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
@@ -17,8 +21,8 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
+  url: https://hanlululu.github.io/Socialgraphswebsite.io/Page4_Sentiment.html?fbclid=IwAR0h0zjmyFPv81icsAOa24Tff27JMEx0SETuggSlFd0ewjuGJE3VIBSg3pk  # Online location of your book
+  path_to_book: (root)  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
