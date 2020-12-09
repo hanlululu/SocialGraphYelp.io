@@ -89,7 +89,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to the Las Vegas Hotels network
+   Welcome to the Las Vegas Hotels Network
   </a>
  </li>
 </ul>
@@ -212,12 +212,6 @@
         
         
         
-<<<<<<< HEAD
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-=======
->>>>>>> parent of 6febfc9... changed
         
     </div>
 </div>
@@ -238,7 +232,16 @@
 </div>
 <div class="section" id="nlp-analysis-of-hotel-reviews">
 <h1>NLP analysis of hotel reviews<a class="headerlink" href="#nlp-analysis-of-hotel-reviews" title="Permalink to this headline">¶</a></h1>
-<p>Text here</p>
+<p>Keywords detection have been performed on the reviews of each of the hotels and since we are dealing with user-written reviews of amenities they might have strong opinions on, the most important parts of speech for our analysis are: <em><strong>adjectives</strong></em>.</p>
+<p>Therefore, in order to remove neutral words and enhance the understanding of the customers’ feelings towards hotels, the full text in a review has been tokenized and cleaned so that only the adjectives in such a review have been extracted.</p>
+<p>The following steps have been conducted to clean the texts (reviews)</p>
+<ul class="simple">
+<li><p>Tokenizing (separating long text into words/tokens)</p></li>
+<li><p>Removing punctuation and non-alphanumeric characters</p></li>
+<li><p>Removing stopwords (very frequenct English auxiliary words with no meaningful value)</p></li>
+</ul>
+<p>Later, <strong>TF-IDF (Term Frequency - Inverse Document Frequency)</strong> calculations have been performed on the cleaned texts to obtain a meaningful ranking of the words describing each hotel. The top 10 keywords for each hotel have been extracted.</p>
+<p>The plot below shows an  interactive map of Las Vegas where the hotels have been marked as nodes and number of review counts as nodesizes. If you hover over the nodes you will be able to see the <strong>name</strong>, <strong>review count</strong> and <strong>Top 3 keywords</strong> of each of the hotels.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -348,11 +351,7 @@ if (outputEl) {{
     {
         requestKernel: true,
         binderOptions: {
-<<<<<<< HEAD
-            repo: "executablebooks/jupyter-book",
-=======
             repo: "binder-examples/jupyter-stacks-datascience",
->>>>>>> parent of 6febfc9... changed
             ref: "master",
         },
         codeMirrorConfig: {
@@ -384,7 +383,7 @@ if (outputEl) {{
     <div class="container">
       <p>
         
-          By Yingrui, Sebastians, Hanlu<br/>
+          By Yingrui, Sebastian, Hanlu<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

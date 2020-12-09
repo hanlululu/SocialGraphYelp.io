@@ -48,15 +48,24 @@ pio.renderers.default = 'notebook'
 
 # # The yelp dataset 
 
+# The original dataset that we have selected to analyse this problem is the [Yelp dataset](https://www.yelp.com/dataset). This dataset contains a large subset of Yelp's businesses, reviews, check-ins and user-related public anonymous data. It was originally created for the Kaggle _Yelp Dataset Challenge_ which encouraged academics to conduct research or analysis on
+# the company's subset of data and show their discoveries to the world. 
+# 
+# The original __Yelp Academic Dataset__ contains information about 1.637.138 reviews collected from 192.609 businesses across 10 metropolitan areas in multiple countries of the world. Since this dataset is extremely large to work with (containing __10+ GB of data__), we have subsetted the data further into __one geographical area of interest: Las Vegas, US__, and __one business category: Hotels__. 
+# 
+# *Here we present the filtered dataframes for hotels and their reviews*
+# 
+# ---
+
+# ## The Hotels Dataframe
+
+# There are in total **438 hotels** identified by their unique business ids. The name, address, city, state, postal_code, latitude, longitude have been collected. The average stars of the hotels can be seen in the "stars" column, right next to the review_counts. 
+
+# business_df = pd.read_csv('./data/las_vegas_all_business.csv')
+# review_df = pd.read_csv('./data/las_vegas_all_reviews.csv')
+# keywords = pd.read_csv('./data/las_vegas_business_keywords.csv')
+
 # In[2]:
-
-
-business_df = pd.read_csv('./data/las_vegas_all_business.csv')
-review_df = pd.read_csv('./data/las_vegas_all_reviews.csv')
-keywords = pd.read_csv('./data/las_vegas_business_keywords.csv')
-
-
-# In[3]:
 
 
 import warnings
@@ -68,22 +77,29 @@ business_df = business_df[business_df.business_id.isin(filter_business_id)].rese
 # Filter reviews based on business_id
 review_df = review_df[review_df.business_id.isin(filter_business_id)].reset_index().drop('index', axis = 1).rename({'stars': 'stars_review'})
 
-columns = ['business_id', 'name', 'address', 'city', 'state', 'postal_code',
-       'latitude', 'longitude', 'stars', 'review_count', 'is_open',
-       'attributes', 'categories', 'hours']
-@interact
-def show_dataframe(column1=columns, column2 = columns, column3 = columns, column4 = columns):
+#columns = ['business_id', 'name', 'address', 'city', 'state', 'postal_code',
+       #'latitude', 'longitude', 'stars', 'review_count', 'is_open',
+       #'attributes', 'categories', 'hours']
+#@interact
+#def show_dataframe(column1=columns, column2 = columns, column3 = columns, column4 = columns):
     
-    return business_df[[column1]+[column2]+[column3]+[column4]]
+    #return business_df[[column1]+[column2]+[column3]+[column4]]
+
+business_df
 
 
-# In[4]:
+# ## The Reviews Dataframe
+
+# There are in total **172159 reviews** stored in the "text" column and the dates of reviews given stored in the "date" column, together with the ratings the users gave shown in the "stars" column. The usefulness, funiness, and coolness of the reviews are also been rated from a scale of 0 to 5. Moreover, the review, user and business ids have been collected. 
+
+# In[52]:
 
 
-columns_rev = ['review_id', 'user_id', 'business_id', 'stars', 'useful', 'funny',
-       'cool', 'text', 'date']
-@interact
-def show_dataframe(column1=columns_rev, column2 = columns_rev, column3 = columns_rev, column4 = columns_rev):
+#columns_rev = ['review_id', 'user_id', 'business_id', 'stars', 'useful', 'funny',
+       #'cool', 'text', 'date']
+#@interact
+#def show_dataframe(column1=columns_rev, column2 = columns_rev, column3 = columns_rev, column4 = columns_rev):
     
-    return review_df[[column1]+[column2]+[column3]+[column4]]
+    #return review_df[[column1]+[column2]+[column3]+[column4]]
+review_df
 

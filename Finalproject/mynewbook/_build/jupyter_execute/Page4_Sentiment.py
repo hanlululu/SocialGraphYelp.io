@@ -351,14 +351,31 @@ for comm in community_tf_idf.keys():
 
 # # Sentiment Analysis
 
-# In[15]:
+# Finally for our project, we are interested in understanding which hotels were given the most positive reviews and which hotels were performing poorest. Since there is a large set of reviews written by independent users, we can suggest that, by performing sentiment analysis upon the aggregated reviews for each hotel in part, we will be able to find the best hotels in Las Vegas.
+# 
+# Our sentiment analysis is dependent on an initial set of words which have sentiment scoring, used for comparing back to the words found in our reviews.
+# 
+# This happens to be one of major researches of Prof. __Finn Årup Nielsen__, researcher at DTU Compute, which created the __[AFINN](https://github.com/fnielsen/afinn) dataset__. AFINN is a list of words rated for sentimental valence, and scored on an integer scale between -5 (negative) and 5 (positive). Therefore, a completely neutral word or sentence would have a score of 0. This dataset has been updated several times throughout the years, with the latest update being in 2015. This is the dataset which we are using.
+# 
+# Below is a snippet of what the AFINN-165 dataset looks like. 
+
+# In[18]:
 
 
 afinn = pd.read_csv('./data/AFINN-165.txt', sep="\t", skiprows = 2, header = None).rename(columns = {0: 'word', 1: 'sentiment_score'})
 afinn
 
 
-# In[5]:
+# The following steps have been conducted to compute sentiment score of each business or community
+# 
+# * Extract words from reviews
+# * Remove stopwords to minimize the influence of the most common words (which often do not indicate emotional feelings on purpose)
+# * Use AFINN-165 sentiment score dictionary (as reference) to obtain the sentiment score of each word
+# * Sum up the sentiment scores of each word shown in the review text and compute the average sentiment by dividing the number of words
+
+# We will plot the histogram of scores __with__ and __without__ stopwords, across all the hotels in Las Vegas.
+
+# In[20]:
 
 
 # Create a dictionary containing the avg happiness score of each word from LabMT
@@ -390,49 +407,89 @@ def sentiment_score(reviews, remove_stopwords=True, sentiment_score = afinn_sent
     
     return sentiment
 
-business_sentiment = sentiment_score(business_reviews)
-business_df['sentiment'] = business_df['business_id'].map(business_sentiment)  
-business_sentiment_value_sorted = sorted([v for k, v in business_sentiment.items()], reverse = True)
+business_sentiment_without_stopwords = sentiment_score(business_reviews, remove_stopwords = True)
+business_sentiment_with_stopwords = sentiment_score(business_reviews, remove_stopwords = False)
 
-hist, bin_edge = np.histogram(business_sentiment_value_sorted, bins=100)
-plt.plot(bin_edge, np.insert(hist, 0, hist[0]), drawstyle='steps')
-plt.xlabel('Bins')
-plt.ylabel('Count')
-plt.title('Sentiment histogram of hotels in Las Vegas')
-plt.ylabel('Number of hotels')
-plt.xlabel('Sentiment score')
+# Sort business sentiment by its value for plotting histogram
+
+business_sentiment_without_stopwords_sorted = sorted([v for k, v in business_sentiment_without_stopwords.items()], reverse = True)
+business_sentiment_with_stopwords_sorted = sorted([v for k, v in business_sentiment_with_stopwords.items()], reverse = True)
+
+
+# Plot the histogram of sentiment scores over each hotel
+fig, ax = plt.subplots(2,1, figsize=(10, 10), sharex = True, sharey = True)
+
+hist_without_stopwords, bin_edge_without_stopwords = np.histogram(business_sentiment_without_stopwords_sorted, bins = 16)
+ax[0].plot(bin_edge_without_stopwords, np.insert(hist_without_stopwords, 0, hist_without_stopwords[0]), drawstyle = 'steps')
+ax[0].set_title('Sentiment histogram of hotels in Las Vegas (without stopwords)')
+ax[0].set_ylabel('Number of hotels')
+ax[0].set_xlabel('Sentiment score')
+
+hist_with_stopwords, bin_edge_with_stopwords = np.histogram(business_sentiment_with_stopwords_sorted, bins = 16)
+ax[1].plot(bin_edge_with_stopwords, np.insert(hist_with_stopwords, 0, hist_with_stopwords[0]), drawstyle = 'steps')
+ax[1].set_title('Sentiment histogram of hotels in Las Vegas (with stopwords)')
+ax[1].set_ylabel('Number of hotels')
+ax[1].set_xlabel('Sentiment score')
+
 plt.show()
 
 
-# In[6]:
+# ## The "best" and "worst" Hotels
+
+# - **Best 10**
+
+# In[23]:
 
 
 business_sentiment_sorted = sorted([v for k, v in business_sentiment.items()], reverse = True)
 i = 1
-# Sort the sentiment score dictionary of businesses by value from highest to lowest
-for key, value in sorted(business_sentiment.items(), key = lambda x:x[1], reverse = True)[:10]:
-    print('#{} {}: {}'.format(i, business_df[business_df.business_id == key].name.values[0], value))
+
+# Sort the sentiment score dictionary of businesses by value from highest to lowest and pick top 10
+for key, value in sorted(business_sentiment_with_stopwords.items(), key = lambda x:x[1], reverse = True)[:10]:
+    print('#{} {} - Sentiment: {}, Rating: {}'.format(i, 
+                                                      business_df[business_df.business_id == key].name.values[0], 
+                                                      value, 
+                                                      business_df[business_df.business_id == key].stars.values[0]))
     i += 1
 
 
-# In[7]:
+# - **Worst 10**
+
+# In[24]:
 
 
 i = 1
-# Sort the sentiment score dictionary of businesses by value from highest to lowest
-for key, value in sorted(business_sentiment.items(), key = lambda x:x[1], reverse = True)[-10:]:
-    print('#{} {}: {}'.format(i, business_df[business_df.business_id == key].name.values[0], value))
+# Sort the sentiment score dictionary of businesses by value from highest to lowest and pick top 10
+for key, value in sorted(business_sentiment_with_stopwords.items(), key = lambda x:x[1], reverse = False)[:10]:
+    print('#{} {} - Sentiment: {}, Rating: {}'.format(i,
+                                                      business_df[business_df.business_id == key].name.values[0], 
+                                                      value, 
+                                                      business_df[business_df.business_id == key].stars.values[0]))
     i += 1
 
 
-# In[8]:
+# In[25]:
 
 
 community_sentiment = sentiment_score(community_reviews)
 community_sentiment
 
 
-# ## Temporal sentiment map
+# ## Temporal sentiment geomapping
+
+# Now that we have identified the general sentiment trends across our Yelp Hotels dataset, it is important to also link these sentiments to the geo-temporal dimension that our dataset comes from. In other words, we know that each hotel is located at a specific (latitude, longitude) location, and that every review has been written at a certain date and hour in time.
+# 
+# We will use these two dimensions to analyze an interactive geo-map, where we position the hotels according to their location on the map, and their sentiment scores in the time domain will dictate the color of their node.
+# 
+# The following two cases are considered:
+# 
+# 1. Seasonal temporal map, where we will check if sentiment scores change based on the year quarter (_e.g. Q1 - January to March, etc._) in which they were written;
+# 
+# 2. Time-of-day temporal map, where we will check the trend of sentiment scores across the 5 different times of day during which they were written (morning, noon, afternoon, evening, night);
+
+# - **Geomap of the overall sentiment score**
+
+# This first geomap is showing the overall sentiments across each hotel in Las Vegas. This visualization does not take into account any temporal domain separation, and is included as a baseline reference of how the Las Vegas landscape looks like, in terms of sentiment analysis.
 
 # In[9]:
 
@@ -527,6 +584,12 @@ fig.update_layout(margin={'r': 0, 't': 0, 'l': 0, 'b': 0})
 fig.show()
 
 
+# As we can see, most hotels have a slighly positive experience rating, with the ones in the center of the city being more inclined to have a better overall score, while the perifery of the city shows some hotels with a rather neutral outlook.
+
+# - **Seasonal temporal map (based on yearly quarters)**
+
+# For our second geomap, we will compute sentiment scores of businesses in each quarter of year, to see if there is any variation between seasons. Based on the segmentation of time, now it is possible to compute the sentiment score for every hotel during each time-period:
+
 # In[12]:
 
 
@@ -600,6 +663,14 @@ fig_quarter.update_layout(mapbox_style='carto-positron')
 fig_quarter.update_layout(margin={'r': 0, 't': 0, 'l': 0, 'b': 0})
 fig_quarter.show()
 
+
+# Based on the interactive ___`plotly`___ visualization above, we can identify that most positive sentiment scores are given in Q1 of the year, meaning in the months between January & March (inclusive), while the lowest sentiment scores can be found from reviews written in the Q3 period of the year (meaning in the months of July, August & September).
+# 
+# It seems that this behavior is in connection with the both the higher tourist expectations, who generally arrive in the summer months, as well as the increased crime rate during the summertime (statistics found from US journalism house: [report here](https://www.governing.com/topics/public-justice-safety/gov-summer-crime-rates-increases-police.html)). 
+
+# - **Time-of-day temporal map**
+
+# Our final geomap refers to the sentiment scores received by reviews, grouped by the time of day during which they were written. We are interested in seeing if there is any change between the different periods of a day during which a review is submitted. For that, we will again compute sentiment scores of businesses for each time of day individually, and use an interactive ___`plotly`___ visualization to show the differences in scores as changing node colors.
 
 # In[14]:
 
@@ -688,3 +759,7 @@ fig_day.update_layout(mapbox_style='carto-positron')
 fig_day.update_layout(margin={'r': 0, 't': 0, 'l': 0, 'b': 0})
 fig_day.show()
 
+
+# Through understanding the geomap above, we can clearly see that the least-positive reviews are written during the morning time (between 06:00 AM and 11:00 AM), with almost no hotel at all received an aggregated sentiment score above 1 (out of max. +5). In contrast, reviews written during the evening are the most positive, with aggregated sentiments for the same hotel crossing above the 1.00 score mark, and, for the best hotels, averaging around 1.7-1.8 in total. Reviews posted during the afternoon or nighttime seem to be more neutral than during the evening, however still manage to cross the borderline 0.00 score.
+# 
+# In general, this clearly shows a trend in the review-posting behavior of users, and by clicking the buttons of the visualization, one can get a quick overview that this trend is applicable across the vast majority of the hotels, making it a temporal trend effect (rather than localized behaviour of a specific hotel).

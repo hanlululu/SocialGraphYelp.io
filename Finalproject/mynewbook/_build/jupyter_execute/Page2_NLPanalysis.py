@@ -60,7 +60,19 @@ review_df = review_df[review_df.business_id.isin(filter_business_id)].reset_inde
 
 # # NLP analysis of hotel reviews 
 
-# Text here
+# Keywords detection have been performed on the reviews of each of the hotels and since we are dealing with user-written reviews of amenities they might have strong opinions on, the most important parts of speech for our analysis are: ___adjectives___. 
+# 
+# Therefore, in order to remove neutral words and enhance the understanding of the customers' feelings towards hotels, the full text in a review has been tokenized and cleaned so that only the adjectives in such a review have been extracted.
+# 
+# The following steps have been conducted to clean the texts (reviews)
+# 
+# * Tokenizing (separating long text into words/tokens)
+# * Removing punctuation and non-alphanumeric characters
+# * Removing stopwords (very frequenct English auxiliary words with no meaningful value)
+# 
+# Later, **TF-IDF (Term Frequency - Inverse Document Frequency)** calculations have been performed on the cleaned texts to obtain a meaningful ranking of the words describing each hotel. The top 10 keywords for each hotel have been extracted. 
+# 
+# The plot below shows an  interactive map of Las Vegas where the hotels have been marked as nodes and number of review counts as nodesizes. If you hover over the nodes you will be able to see the **name**, **review count** and **Top 3 keywords** of each of the hotels.
 
 # In[2]:
 

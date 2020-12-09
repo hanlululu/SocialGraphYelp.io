@@ -215,6 +215,10 @@ business_df['top_keywords'] = business_df['business_id'].map(business_top_keywor
 
 # # Network analysis 
 
+# After we have determined the top 10 most relevant keywords for each business in part, these **keywords are being used to define the connection between the hotels** and the number of the common keywords determine the strengths of connections.
+# 
+# There are initially 438 hotels/nodes in the network, where **421** of them remains after removing the isolated nodes. We have found **10790 edges** in the network.  
+
 # In[3]:
 
 
@@ -223,24 +227,20 @@ G = nx.Graph()
 # Adding nodes
 G.add_nodes_from(business_top_keywords.keys())
 
+# Assign business name as an attribute to each node/business (for plotting it later)
+for node in G.nodes:
+    G.nodes[node]['business_name'] = business_df.name[business_df.business_id == node].values[0]
 print('Initially, the total number of nodes/businesses in the network is:', G.number_of_nodes())
 
 
 # In[4]:
 
 
-# We will remodel the "Top Keywords" dictionary into a dataframe in long-format, where each row corresponds to a (business_id, unique_keyword) combination
-# We want this specific form for the dataframe, so that we can group by keywords afterwards, and identify which businesses have keywords in common
-# A .reset_index() is needed here, in order to add an dummy extra column for the "groupby" function to perform a "count" operation into.
-
 keyword_df = pd.DataFrame(business_top_keywords).melt(var_name = 'business_id', value_name = 'keywords').reset_index()
 
 # Group keywords by 'business_id', to find the businesses sharing top keywords
 
 grouped_keyword_df = keyword_df.groupby(['keywords', 'business_id']).count()['index']
-
-# Here, we are interating through the grouped set of keywords, 
-# and if two businesses have the same keyword in common, we will create a network edge between the two busineses
 
 for _, business_sub_df in grouped_keyword_df.groupby(level = 0):
     
@@ -257,7 +257,6 @@ for _, business_sub_df in grouped_keyword_df.groupby(level = 0):
             # new edge, therefore initialize link with weight = 1
             G.add_edge(node1, node2, weight = 1)
             
-print('Using the top n = %d keywords from TF-IDF, the initialized number of edges is: %d' % (n, G.number_of_edges()))
 
 
 # In[5]:
@@ -278,7 +277,11 @@ print('Also, the number of edges present in the network now is:', G.number_of_ed
 
 # ## The network plot
 
-# - With forceatlas
+# ### With Force Atlas 
+
+# In order to visualize how the constructed graph looks like, we will use a __force-directed layout__ for our graph, based on the Force Atlas algorithm, which computes node positions spatializing our undirected weighted graph. 
+# 
+# Node sizes are calculated based on the total number of reviews that each hotel has, multiplied by a minimizing constant, so as to make the sizes reasonable to display. Therefore, very popular hotels will have larger node sizes than most others.
 
 # In[6]:
 
@@ -308,18 +311,26 @@ plt.title('Network of hotels connected by the number of shared keywords from rev
 nx.draw(G, pos = positions, node_size = node_sizes, node_color = 'blue', width = 0.01)
 
 
-# - Interactive 
+# ### Interactive plot with Plotly
+
+# By hovering over the interactive graph, you will be able to find how many connections each hotel has with its neighbors/competitors. It can be clearly seen that the most popular nodes are also some of the ones with highest degree of connection, meaning that they share a larger number of competitors than most other businesses. 
 
 # In[8]:
 
 
-hotelnames = list(G.nodes())
-lat = list(business_df[business_df.business_id.isin(hotelnames)].latitude)
-lon = list(business_df[business_df.business_id.isin(hotelnames)].longitude)
-position = dict(zip(hotelnames, np.array(list(zip(lat, lon)))))
-node_size = list(business_df[business_df.business_id.isin(hotelnames)].review_count*0.005)
+# Extract latitude of hotel corresponding to each node
+lat = list(business_df[business_df.business_id.isin(G.nodes())].latitude)
 
-for n,p in position.items():
+# Extract longitude of hotel corresponding to each node
+lon = list(business_df[business_df.business_id.isin(G.nodes())].longitude)
+
+# Define position of nodes using latitude and longitude
+position = dict(zip(G.nodes(), zip(lat, lon)))
+
+# Use review_count (while minimizing it to a reasonable scale for plotting) to indicate the node size
+node_size = list(business_df[business_df.business_id.isin(G.nodes())].review_count*0.005)
+
+for n,p in positions.items():
     G.nodes[n]['pos']=p
     
 edge_x = []
@@ -336,7 +347,7 @@ for edge in G.edges():
 
 edge_trace = go.Scatter(
     x=edge_x, y=edge_y,
-    line=dict(width=0.01, color='#888'),
+    line=dict(width=0.01, color='darkred'),
     hoverinfo='none',
     mode='lines')
 
@@ -373,7 +384,7 @@ for node, adjacencies in enumerate(G.adjacency()):
     node_text.append('# of connections: '+str(len(adjacencies[1])))
 
 for node in G.adjacency():
-    node_names.append(node[0])
+     node_names.append(nx.get_node_attributes(G, 'business_name')[node[0]])
 
 node_trace.marker.color = node_adjacencies
 node_trace.text = list(zip(node_names,node_text))
@@ -398,6 +409,14 @@ fig.show()
 
 
 # ### Degree distribution 
+
+# To verify whether the assumption that the network follows Barabasi-Albert properties the linear and log-log degree distribution of the network are plotted, as done below.
+# 
+# The network edges are weight-adjusted depending on the number of common review keyworks, with higher thickness/weight meaning higher number of common keywords found.
+# 
+# - The maximum degree in the network is 160
+# 
+# - The minimum degree in the network is 1 
 
 # In[9]:
 
@@ -431,6 +450,12 @@ axs[1].set_ylabel('Frequency');
 
 
 # ## Community detection 
+
+# To investigate whether there are any groupings or clusters of hotels which are similar in terms of their special features or experiences (which get mentioned in users' reviews), we have performed community detection. 
+# 
+# For this, we compute and maximize the modularity score of each group of nodes through using the __Louvain__ algorithm, which looks as how much more densely connected the nodes in a community are, compared to how connected the same nodes would be in a random network. The Louvain algorithm is an unsupervised clustering method, and allows finding of the best partition of nodes into communities from a full-scale graph.
+# 
+# **4 communities have been found and visualised via Force Atlas Algorithmn and Plotly (interactive) below.**
 
 # In[11]:
 
@@ -500,94 +525,69 @@ for i in dict_communities.keys():
 plt.title("Louvain community partitioning for the Yelp-registered hotels in Las Vegas, using Force-Atlas node coordinates", fontsize = 20);
 
 
-# - Interactive 
+# The visual representation shows a clear separation of the network plot into the 4 communities, which is a very nice result. It seems that there are 3 large communities of approximatively similar sizes, and one smaller community whose nodes are scattered across the graph due to their interaction with a wide variety of hotels located all across the graph.
 
-# In[14]:
+# In[15]:
 
 
-for n,p in position.items():
-    G.nodes[n]['pos']=p
-    
-edge_x = []
-edge_y = []
-for edge in G.edges():
-    x0, y0 = G.nodes[edge[0]]['pos']
-    x1, y1 = G.nodes[edge[1]]['pos']
-    edge_x.append(x0)
-    edge_x.append(x1)
-    edge_x.append(None)
-    edge_y.append(y0)
-    edge_y.append(y1)
-    edge_y.append(None)
+# Add position information of edges
+edge_trace_community = edge_trace
 
-edge_trace = go.Scatter(
-    x=edge_x, y=edge_y,
-    line=dict(width=0.01, color='#888'),
-    hoverinfo='none',
-    mode='lines')
+# Add position information of nodes
+node_trace_community = node_trace
 
-node_x = []
-node_y = []
-for node in G.nodes():
-    x, y = G.nodes[node]['pos']
-    node_x.append(x)
-    node_y.append(y)
+# Change color of edges
+edge_trace_community['line']['color'] = 'darkred'
 
-node_trace = go.Scatter(
-    x=node_x, y=node_y,
-    mode='markers',
-    hoverinfo='text',
-    marker=dict(
-        showscale=True,
-        # colorscale options
-        #'Greys' | 'YlGnBu' | 'Greens' | 'YlOrRd' | 'Bluered' | 'RdBu' |
-        #'Reds' | 'Blues' | 'Picnic' | 'Rainbow' | 'Portland' | 'Jet' |
-        #'Hot' | 'Blackbody' | 'Earth' | 'Electric' | 'Viridis' |
-        colorscale='Blackbody',
-        reversescale=True,
-        color=[],
-        size=node_size,
-        colorbar=dict(
-            thickness=15,
-            title='Communities',
-            xanchor='left',
-            titleside='right'
-        ),
-        line_width=2))
+# Remove colorbar
+node_trace_community['marker']['showscale'] = False
 
 node_group = []
 node_names = []
 
 for node in G.adjacency():
-    node_names.append(node[0])
-    node_group.append('Community: '+ str([k for k,v in dict_communities.items() if node[0] in v]))
     
-node_trace.marker.color = node_color_list
-node_trace.text = list(zip(node_names,node_group))
+    # Extract the names of nodes/hotels to show on plot
+    node_names.append(nx.get_node_attributes(G, 'business_name')[node[0]])
+    
+    # Store the texts to indicates which community the node belongs to on the plot
+    node_group.append('Community: '+ str([k for k,v in dict_communities.items() if node[0] in v]))
+# Assign different colors to the nodes which belong to different communities 
+# The color list is the same one used in community partition
+node_trace_community.marker.color = node_color_list
 
-### create graph 
-fig = go.Figure(data=[edge_trace, node_trace],
-             layout=go.Layout(
-                plot_bgcolor='white',
-                title='Hotel communities',
-                titlefont_size=30,
-                showlegend=False,
-                hovermode='closest',
-                margin=dict(b=20,l=5,r=5,t=60),
-                #annotations=[ dict(
-                    #text="Python code: <a href='https://plotly.com/ipython-notebooks/network-graphs/'> https://plotly.com/ipython-notebooks/network-graphs/</a>",
-                    #showarrow=False,
-                    #xref="paper", yref="paper",
-                    #x=0.005, y=-0.002 ) ],
-                xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
-                )
-fig.show()
+# Combine names and explanatory texts of nodes for plotting
+node_trace_community.text = list(zip(node_names, node_group))
+# Plot interactive graph
+fig_network_community = go.Figure(data = [edge_trace_community, node_trace_community],
+                                  layout = go.Layout(plot_bgcolor = 'white',
+                                  title = 'Communities Network',
+                                  titlefont_size = 20,
+                                  showlegend = False,
+                                  hovermode = 'closest',
+                                  margin = dict(b=0, l=0, r=0, t=60),
+                                  annotations = [dict(showarrow = False,
+                                                      text = 'Interactive visualization of the Yelp communities of hotels in Las Vegas',
+                                                      xref = 'paper', 
+                                                      yref = 'paper',
+                                                      x = 0.005, 
+                                                      y = -0.002)],
+                                  xaxis = dict(showgrid = False, zeroline = False, showticklabels = False),
+                                  yaxis = dict(showgrid = False, zeroline = False, showticklabels = False)))
+fig_network_community.show()
 
 
-# - Wordclouds
+# The interactive visualization helps easily see that some of the very **popular hotels are residing in Community 3**, and that perhaps might have an important effect as to why they have been grouped together in the same community. 
+# 
+# By hovering over the interactive graph, you will be able able to find which hotels are belonging to what community.
 
-# In[32]:
+# ### Community Wordclouds
+
+# We will take a look at what words characterize each community. It is relevant to see this, in order to understand if there is a trend for **why certain hotels were grouped together**, and also for understanding what kind of experiences do you normally get from hotels in that community.
+# 
+# We have aggregated all the reviews for each community independently, and calculate TF, IDF and TF-IDF scores upon their aggregated reviews.
+
+# In[16]:
 
 
 # Convert reviews of each community into one text for analysis
@@ -622,7 +622,7 @@ def dict_to_string(word_dict, amplify=True):
     return total_string
 
 
-# In[96]:
+# In[17]:
 
 
 text = {}
@@ -631,9 +631,31 @@ for comm in community_tf_idf.keys():
     text[comm] = dict_to_string(community_tf_idf[comm], False)
 
 
-# In[104]:
+# In[18]:
 
 
+def create_wordcloud(frame = fixed(text) , community = [0, 1, 2, 3], maximum = [50,100,300] , atitle = fixed('')):
+    if community == 0:
+        mk = imageio.imread('./data/club.jpg')
+    if community == 1:
+        mk = imageio.imread('./data/diamond.png')
+    if community == 2:
+        mk = imageio.imread('./data/spade.jpg')
+    if community == 3:
+        mk = imageio.imread('./data/heart.jpg')
+   
+    wordcloud = WordCloud(max_font_size = 70, 
+                                       max_words = maximum, 
+                                       background_color = 'white',
+                                       collocations = False,
+                                       mask = mk).generate(text[community])
+    image_colors = ImageColorGenerator(mk)
+    
+    plt.style.use('seaborn')
+    plt.figure(figsize=[15, 15])
+    plt.title('community '+str(community), fontsize = 20)
+    plt.imshow(wordcloud.recolor(color_func = image_colors), interpolation = 'bilinear')
+    plt.axis('off')
 @interact   
 def create_wordcloud(frame = fixed(text) , community = [0, 1, 2, 3], maximum = [50,100,300] , atitle = fixed('')):
     if community == 0:
@@ -660,8 +682,61 @@ def create_wordcloud(frame = fixed(text) , community = [0, 1, 2, 3], maximum = [
     
 
 
-# In[ ]:
+# In[19]:
 
 
+text = {}
+wordclouds = []
+colors = []
+for comm in community_tf_idf.keys():
+    text[comm] = dict_to_string(community_tf_idf[comm], False)
+    
+    # Static wordclouds (as interactive one does not show on the jupyter notebook)
+    if comm == 0:
+        mk = imageio.imread('./data/club.jpg')
+    if comm == 1:
+        mk = imageio.imread('./data/diamond.png')
+    if comm == 2:
+        mk = imageio.imread('./data/spade.jpg')
+    if comm == 3:
+        mk = imageio.imread('./data/heart.jpg')
+   
+    wordclouds.append(WordCloud(max_font_size = 70, 
+                                                max_words = 100, 
+                                                background_color = 'white',
+                                                collocations = False,
+                                                mask = mk).generate(text[comm]))
+    colors.append(ImageColorGenerator(mk))
+# Display the generated images
+fig, axs = plt.subplots(2, 2,figsize=(16,12))
+axs[0, 0].imshow(wordclouds[0].recolor(color_func = colors[0]), interpolation='bilinear')
+axs[0, 0].set_title('Community 0')
+axs[0, 0].axis('off')
+
+axs[0, 1].imshow(wordclouds[1].recolor(color_func = colors[1]), interpolation='bilinear')
+axs[0, 1].set_title('Community 1')
+axs[0, 1].axis('off')
+
+axs[1, 0].imshow(wordclouds[2].recolor(color_func = colors[2]), interpolation='bilinear')
+axs[1, 0].set_title('Community 2')
+axs[1, 0].axis('off')
+
+axs[1, 1].imshow(wordclouds[3].recolor(color_func = colors[3]), interpolation='bilinear')
+axs[1, 1].set_title('Community 3')
+axs[1, 1].axis('off')
+
+plt.tight_layout(pad = 1)
 
 
+# The community wordplot shows multiple very interesting and relevant findings:
+# 
+# * Community 0 contains many keywords related to casino ('_tip_', '_carlo_', '_shark'_, '_booth_', etc.), as well as words related to the adult night life of Las Vegas.
+# 
+# 
+# * Community 1 is the hardest one to pin-point. It seems that a central "theme" of the reviews belonging to hotels in this community is centered about the hotel staff, and words related to security. Later on, we will find that this community is also the one with the lowest sentiment score, which indicates that the comments regarding the staff here are not encouraging ones.
+# 
+# 
+# * Community 2 (_which we will later see that it is the happiest community_) is related very strongly to food, desserts and fruits. The hotels grouped in this community seem to have the common specialization in exquisite and delicious culinary adventures.
+# 
+# 
+# * Community 3 seems to have most words related to games, alcoholic drinking, as well as swear words, indicating that this community may be strongly involved with bar-hotels and the ones of a more "frivolous" nature.
